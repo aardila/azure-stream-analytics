@@ -1,4 +1,4 @@
-//********************************************************* 
+﻿//********************************************************* 
 // 
 //    Copyright (c) Microsoft. All rights reserved. 
 //    This code is licensed under the Microsoft Public License. 
@@ -21,47 +21,33 @@ using System.Text;
 
 namespace TwitterClient
 {
-    public struct TwitterConfig
-    {
-        public readonly string OAuthToken;
-        public readonly string OAuthTokenSecret;
-        public readonly string OAuthConsumerKey;
-        public readonly string OAuthConsumerSecret;
-        public readonly string Keywords;
-
-        public TwitterConfig(string oauthToken, string oauthTokenSecret, string oauthConsumerKey, string oauthConsumerSecret, string keywords)
-        {
-            OAuthToken = oauthToken;
-            OAuthTokenSecret = oauthTokenSecret;
-            OAuthConsumerKey = oauthConsumerKey;
-            OAuthConsumerSecret = oauthConsumerSecret;
-            Keywords = keywords;
-        }
-    }
-
-    [DataContract]
-    public class TwitterUser
-    {
-        [DataMember(Name = "time_zone")]               public string TimeZone;
-        [DataMember(Name = "name")]                    public string Name;
-        [DataMember(Name = "profile_image_url")]       public string ProfileImageUrl;
-    }
-
     [DataContract]
     public class Tweet
     {
-        [DataMember(Name = "id")]                      public Int64 Id;
-        [DataMember(Name = "in_reply_to_status_id")]   public Int64? ReplyToStatusId;
-        [DataMember(Name = "in_reply_to_user_id")]     public Int64? ReplyToUserId;
-        [DataMember(Name = "in_reply_to_screen_name")] public string ReplyToScreenName;
-        [DataMember(Name = "retweeted")]               public bool Retweeted;
-        [DataMember(Name = "text")]                    public string Text;
-        [DataMember(Name = "lang")]                    public string Language;
-        [DataMember(Name = "source")]                  public string Source;
-        [DataMember(Name = "retweet_count")]           public string RetweetCount;
-        [DataMember(Name = "user")]                    public TwitterUser User;
-        [DataMember(Name = "created_at")]              public string CreatedAt;
-        [IgnoreDataMember]                             public string RawJson;
+        [DataMember(Name = "id")]
+        public Int64 Id;
+        [DataMember(Name = "in_reply_to_status_id")]
+        public Int64? ReplyToStatusId;
+        [DataMember(Name = "in_reply_to_user_id")]
+        public Int64? ReplyToUserId;
+        [DataMember(Name = "in_reply_to_screen_name")]
+        public string ReplyToScreenName;
+        [DataMember(Name = "retweeted")]
+        public bool Retweeted;
+        [DataMember(Name = "text")]
+        public string Text;
+        [DataMember(Name = "lang")]
+        public string Language;
+        [DataMember(Name = "source")]
+        public string Source;
+        [DataMember(Name = "retweet_count")]
+        public string RetweetCount;
+        [DataMember(Name = "user")]
+        public TwitterUser User;
+        [DataMember(Name = "created_at")]
+        public string CreatedAt;
+        [IgnoreDataMember]
+        public string RawJson;
 
         public static IEnumerable<Tweet> StreamStatuses(TwitterConfig config)
         {
@@ -163,63 +149,9 @@ namespace TwitterClient
                 return new StreamReader(tresponse.Result.GetResponseStream());
             else
             {
-                request.Abort(); 
+                request.Abort();
                 return StreamReader.Null;
             }
         }
     }
-
-
-    public class TwitterPayload
-    {
-        public Int64 ID;
-        public DateTime CreatedAt;
-        public string UserName;
-        public string TimeZone;
-        public string ProfileImageUrl;
-        public string Text;
-        public string Language;
-        public string Topic;
-        public int SentimentScore;
-
-        public string RawJson;
-
-        public override string ToString()
-        {
-            return new { ID, CreatedAt, UserName, TimeZone, ProfileImageUrl, Text, Language, Topic, SentimentScore }.ToString();
-        }
-    }
-
-    public class Payload
-    {
-        public DateTime CreatedAt;
-        public string Topic;
-        public int SentimentScore;
-                
-        public override string ToString()
-        {
-            return new {  CreatedAt,  Topic, SentimentScore }.ToString();
-        }
-    }
-
-    public class TwitterMin
-    {
-        public Int64 ID;
-        public DateTime CreatedAt;
-        public string UserName;
-//        public string TimeZone;
-//        public string ProfileImageUrl;
-        public string Text;
-//        public string Language;
-        public string Topic;
-        public int SentimentScore;
-
-//        public string RawJson;
-
-        public override string ToString()
-        {
-            return new { ID, CreatedAt, UserName, Text, Topic, SentimentScore }.ToString();
-        }
-    }
-
 }

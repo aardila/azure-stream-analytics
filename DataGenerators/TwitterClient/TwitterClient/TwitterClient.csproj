@@ -98,8 +98,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\EventHubConfig.cs" />
+    <Compile Include="Entities\Payload.cs" />
     <Compile Include="Entities\Sentiment140.cs" />
-    <Compile Include="Entities\TwitterData.cs" />
+    <Compile Include="Entities\Tweet.cs" />
+    <Compile Include="Entities\TwitterConfig.cs" />
+    <Compile Include="Entities\TwitterMin.cs" />
+    <Compile Include="Entities\TwitterPayload.cs" />
+    <Compile Include="Entities\TwitterUser.cs" />
     <Compile Include="EventHubObserver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
